@@ -14,22 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@mail.com',
+        $this->call([
+            UserSeeder::class,
+            WalletSeeder::class,
+            TransactionSeeder::class,
+            TransactionLedgerSeeder::class,
+            // UserRoleSeeder::class,
+            PermissionSeeder::class,
+            PomodoroSessionSeeder::class,
+            ProductTypeSeeder::class,
+            ProductSeeder::class,
+            UserProductSeeder::class,
         ]);
-
-        $user = User::factory()->create([
-            'name' => 'Vinícius',
-            'email' => 'vinicius@mail.com',
-        ]);
-
-        $adminRole = Role::create(['name' => 'Admin']);
-
-        $userRole = Role::create(['name' => 'Bank']);
-
-        $admin->assignRole($adminRole);
-
-        $user->assignRole($userRole);
     }
 }

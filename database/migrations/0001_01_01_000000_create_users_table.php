@@ -67,8 +67,8 @@ return new class extends Migration
             $table->enum('pomodoro_type', ['focus', 'break']);
             $table->integer('time_expected')->default(60);
             $table->date('started_at');
-            $table->date('finished_at');
-            $table->date('abandoned_at');
+            $table->date('finished_at')->nullable();
+            $table->date('abandoned_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
