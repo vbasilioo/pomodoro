@@ -14,6 +14,28 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                primaryBlue: '#29BBFF',
+                borderMouth: '#63CDFF',
+                focus: '#53C7FD',
+                sideBar: '#FBF6E3',
+                primaryPurple: '#B68CD8',
+                primaryOrange: '#F69A66',
+                primaryYellow: '#FFB950',
+                primaryGreen: '#59BCA8',
+                primaryPink: '#FFAECE',
+                primaryDefault: '#ECE5CB'
+            },
+            keyframes: {
+                shake: {
+                    '0%, 100%': { transform: 'translateX(0)' },
+                    '25%, 75%': { transform: 'translateX(-5px)' },
+                    '50%': { transform: 'translateX(5px)' },
+                },
+            },
+            animation: {
+                shake: 'shake 0.5s',
+            },
         },
     },
     plugins: [],
