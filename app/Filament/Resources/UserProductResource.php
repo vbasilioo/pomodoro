@@ -20,7 +20,7 @@ class UserProductResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->can('view userProducts');
+        return optional(auth()->user())->can('view userProducts');
     }
 
     public static function form(Form $form): Form

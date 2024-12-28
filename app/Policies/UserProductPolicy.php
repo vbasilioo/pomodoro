@@ -6,22 +6,22 @@ use App\Models\User;
 
 class UserProductPolicy
 {
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->can('view userProducts');
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->can('create userProducts');
     }
 
-    public function update(User $user)
+    public function update(User $user): bool
     {
         return $user->can('edit userProducts');
     }
 
-    public function delete(User $user)
+    public function delete(User $user): bool
     {
         return $user->can('delete userProducts');
     }

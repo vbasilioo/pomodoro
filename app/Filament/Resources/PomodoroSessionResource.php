@@ -19,7 +19,7 @@ class PomodoroSessionResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->can('view sessions');
+        return optional(auth()->user())->can('view sessions');
     }
 
     public static function form(Form $form): Form

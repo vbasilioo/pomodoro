@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 
 class LangagueSwitchController extends Controller
 {
-    public function switch($locale)
+    public function switch($locale): \Illuminate\Http\RedirectResponse
     {
         Session::put('locale', $locale);
 

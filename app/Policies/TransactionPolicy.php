@@ -6,22 +6,22 @@ use App\Models\User;
 
 class TransactionPolicy
 {
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->can('view transactions');
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->can('create transactions');
     }
 
-    public function update(User $user)
+    public function update(User $user): bool
     {
         return $user->can('edit transactions');
     }
 
-    public function delete(User $user)
+    public function delete(User $user): bool
     {
         return $user->can('delete transactions');
     }

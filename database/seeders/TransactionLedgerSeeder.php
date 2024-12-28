@@ -17,13 +17,15 @@ class TransactionLedgerSeeder extends Seeder
         $transaction = Transaction::first();
         $users = User::all();
 
-        foreach ($users as $user) {
-            TransactionLedger::create([
-                'transaction_id' => $transaction->id,
-                'user_id' => $user->id,
-                'type' => 'credit',
-                'amount' => 25.00,
-            ]);
-        }
+        if($transaction)
+            foreach($users as $user)
+                TransactionLedger::create([
+                    'transaction_id' => $transaction->id,
+                    'user_id' => $user->id,
+                    'type' => 'credit',
+                    'amount' => 25.00,
+                ]);
+        else
+            throw new \Exception('No transaction found to link with TransactionLedger');
     }
 }

@@ -8,3 +8,4 @@ parameters:
         - routes
     level: max
     ignoreErrors: []
+    reportUnmatchedIgnoredErrors: false

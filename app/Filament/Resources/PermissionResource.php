@@ -20,7 +20,7 @@ class PermissionResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->can('view permissions');
+        return optional(auth()->user())->can('view permissions');
     }
 
     public static function form(Form $form): Form

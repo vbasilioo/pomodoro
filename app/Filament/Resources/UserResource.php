@@ -20,7 +20,7 @@ class UserResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->can('view users');
+        return optional(auth()->user())->can('view users');
     }
 
     public static function form(Form $form): Form

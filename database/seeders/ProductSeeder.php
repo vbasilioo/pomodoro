@@ -15,9 +15,12 @@ class ProductSeeder extends Seeder
     {
         $productType = ProductType::first();
 
-        Product::create([
-            'product_type_id' => $productType->id,
-            'price' => 99.99,
-        ]);
+        $productType ? 
+            Product::create([
+                'product_type_id' => $productType->id,
+                'price' => 99.99,
+            ])
+        :
+            throw new \Exception('No product type found.');
     }
 }

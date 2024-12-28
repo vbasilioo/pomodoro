@@ -17,10 +17,12 @@ class UserProductSeeder extends Seeder
         $user = User::first();
         $product = Product::first();
 
-        UserProduct::create([
-            'user_id' => $user->id,
-            'product_id' => $product->id,
-            'bought_at' => now(),
-        ]);
+        $user && $product ?
+            UserProduct::create([
+                'user_id' => $user->id,
+                'product_id' => $product->id,
+                'bought_at' => now(),
+            ]) : 
+            throw new \Exception('User or product not found.');
     }
 }

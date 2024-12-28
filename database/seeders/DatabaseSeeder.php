@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             WalletSeeder::class,
             TransactionSeeder::class,
             TransactionLedgerSeeder::class,
-            // UserRoleSeeder::class,
             PermissionSeeder::class,
             PomodoroSessionSeeder::class,
             ProductTypeSeeder::class,

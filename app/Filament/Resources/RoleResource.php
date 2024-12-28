@@ -22,7 +22,7 @@ class RoleResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->can('view roles');
+        return optional(auth()->user())->can('view roles');
     }
 
     public static function form(Form $form): Form

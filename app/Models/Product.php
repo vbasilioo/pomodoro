@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
@@ -14,7 +15,7 @@ class Product extends Model
         'price',
     ];
 
-    public function productType()
+    public function productType(): BelongsTo
     {
         return $this->belongsTo(ProductType::class, 'product_type_id');
     }

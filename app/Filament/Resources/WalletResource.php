@@ -20,7 +20,7 @@ class WalletResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->can('view wallets');
+        return optional(auth()->user())->can('view wallets');
     }
 
     public static function form(Form $form): Form
@@ -54,7 +54,8 @@ class WalletResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('balance')->sortable()->searchable()->label('Balance')
                     ->formatStateUsing(function ($state) {
-                        return $state ? '$ '.number_format($state, 2) : '-';
+                        $formattedBalance = is_numeric($state) ? '$ ' . number_format((float)$state, 2) : '-';
+                        return $formattedBalance;
                     }),
                 Tables\Columns\TextColumn::make('created_at')->sortable()->searchable()->label('Created at')->date(),
             ])

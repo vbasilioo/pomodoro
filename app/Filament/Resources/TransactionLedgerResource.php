@@ -20,7 +20,7 @@ class TransactionLedgerResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->can('view transactionLedgers');
+        return optional(auth()->user())->can('view transactionLedgers');
     }
 
     public static function form(Form $form): Form
@@ -68,7 +68,8 @@ class TransactionLedgerResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->formatStateUsing(function ($state) {
-                        return $state ? '$ '.number_format($state, 2) : '-';
+                        $formattedBalance = is_numeric($state) ? '$ ' . number_format((float)$state, 2) : '-';
+                        return $formattedBalance;
                     }),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('User Name')
@@ -84,7 +85,8 @@ class TransactionLedgerResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->formatStateUsing(function ($state) {
-                        return $state ? '$ '.number_format($state, 2) : '-';
+                        $formattedBalance = is_numeric($state) ? '$ ' . number_format((float)$state, 2) : '-';
+                        return $formattedBalance;
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created at')
