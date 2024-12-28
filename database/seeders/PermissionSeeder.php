@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use App\Models\User;
 
 class PermissionSeeder extends Seeder
 {
@@ -53,9 +53,13 @@ class PermissionSeeder extends Seeder
         $adminRole->givePermissionTo($permissions);
 
         $adminUser = User::find(1);
-        if($adminUser) $adminUser->assignRole($adminRole);
+        if ($adminUser) {
+            $adminUser->assignRole($adminRole);
+        }
 
         $productManagerUser = User::find(2);
-        if($productManagerUser) $productManagerUser->assignRole($productManagerRole);
+        if ($productManagerUser) {
+            $productManagerUser->assignRole($productManagerRole);
+        }
     }
 }

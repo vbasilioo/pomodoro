@@ -15,15 +15,18 @@ class UserProduct extends Model
         'bought_at',
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function product(){
+    public function product()
+    {
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function productType(){
+    public function productType()
+    {
         return $this->belongsToThrough(ProductType::class, Product::class);
     }
 }

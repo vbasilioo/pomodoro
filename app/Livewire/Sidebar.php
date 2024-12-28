@@ -10,7 +10,7 @@ class Sidebar extends Component
 
     public function toggleSideBar()
     {
-        $this->isOpen = !$this->isOpen;
+        $this->isOpen = ! $this->isOpen;
     }
 
     public function changeBackgroundColor($color)

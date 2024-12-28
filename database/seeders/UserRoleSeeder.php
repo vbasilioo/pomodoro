@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\UserRole;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Carbon\Carbon;
 
 class UserRoleSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class UserRoleSeeder extends Seeder
 
         $admin = User::where('email', 'admin@mail.com')->first();
 
-        if($admin){
+        if ($admin) {
             $admin->assignRole($adminRole);
 
             UserRole::create([

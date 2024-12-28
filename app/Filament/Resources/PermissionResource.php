@@ -3,16 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PermissionResource\Pages;
-use App\Filament\Resources\PermissionResource\RelationManagers;
-use App\Models\Permission;
-use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Spatie\Permission\Models\Permission as ModelsPermission;
 
 class PermissionResource extends Resource
@@ -37,7 +32,7 @@ class PermissionResource extends Resource
                     ->required()
                     ->unique(),
                 Forms\Components\Hidden::make('guard_name')
-                    ->default('web')
+                    ->default('web'),
             ]);
     }
 
@@ -60,7 +55,7 @@ class PermissionResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created at')
                     ->sortable()
-                    ->searchable()
+                    ->searchable(),
             ])
             ->filters([
                 //

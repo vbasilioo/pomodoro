@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\WalletResource\Pages;
-use App\Filament\Resources\WalletResource\RelationManagers;
 use App\Models\Wallet;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class WalletResource extends Resource
 {
@@ -56,8 +53,8 @@ class WalletResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('balance')->sortable()->searchable()->label('Balance')
-                    ->formatStateUsing(function($state){
-                        return $state ? '$ ' . number_format($state, 2) : '-';
+                    ->formatStateUsing(function ($state) {
+                        return $state ? '$ '.number_format($state, 2) : '-';
                     }),
                 Tables\Columns\TextColumn::make('created_at')->sortable()->searchable()->label('Created at')->date(),
             ])

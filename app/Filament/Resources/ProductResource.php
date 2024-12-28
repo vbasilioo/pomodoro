@@ -26,20 +26,20 @@ class ProductResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-        ->schema([
-            Forms\Components\Select::make('product_type_id')
-                ->label('Product Type')
-                ->required()
-                ->relationship('productType', 'name')
-                ->searchable()
-                ->placeholder('Select a product type')
-                ->preload(),
-            
-            Forms\Components\TextInput::make('price')
-                ->label('Price')
-                ->required()
-                ->numeric(),
-        ]);
+            ->schema([
+                Forms\Components\Select::make('product_type_id')
+                    ->label('Product Type')
+                    ->required()
+                    ->relationship('productType', 'name')
+                    ->searchable()
+                    ->placeholder('Select a product type')
+                    ->preload(),
+
+                Forms\Components\TextInput::make('price')
+                    ->label('Price')
+                    ->required()
+                    ->numeric(),
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -58,15 +58,15 @@ class ProductResource extends Resource
                     ->sortable()
                     ->numeric()
                     ->searchable()
-                    ->formatStateUsing(function($state){
-                        return $state ? '$ ' . number_format($state, 2) : '-';
+                    ->formatStateUsing(function ($state) {
+                        return $state ? '$ '.number_format($state, 2) : '-';
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->date()
                     ->label('Created at'),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->date()
-                    ->label('Deleted at')
+                    ->label('Deleted at'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

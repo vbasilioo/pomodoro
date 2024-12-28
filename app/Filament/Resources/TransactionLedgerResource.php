@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TransactionLedgerResource\Pages;
-use App\Filament\Resources\TransactionLedgerResource\RelationManagers;
 use App\Models\TransactionLedger;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TransactionLedgerResource extends Resource
 {
@@ -53,7 +50,7 @@ class TransactionLedgerResource extends Resource
                 Forms\Components\TextInput::make('amount')
                     ->label('Amount')
                     ->required()
-                    ->numeric()
+                    ->numeric(),
             ]);
     }
 
@@ -70,8 +67,8 @@ class TransactionLedgerResource extends Resource
                     ->numeric()
                     ->sortable()
                     ->searchable()
-                    ->formatStateUsing(function($state){
-                        return $state ? '$ ' . number_format($state, 2) : '-';
+                    ->formatStateUsing(function ($state) {
+                        return $state ? '$ '.number_format($state, 2) : '-';
                     }),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('User Name')
@@ -86,8 +83,8 @@ class TransactionLedgerResource extends Resource
                     ->numeric()
                     ->sortable()
                     ->searchable()
-                    ->formatStateUsing(function($state){
-                        return $state ? '$ ' . number_format($state, 2) : '-';
+                    ->formatStateUsing(function ($state) {
+                        return $state ? '$ '.number_format($state, 2) : '-';
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created at')

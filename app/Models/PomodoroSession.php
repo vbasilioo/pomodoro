@@ -18,7 +18,8 @@ class PomodoroSession extends Model
         'abanoned_at',
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 }

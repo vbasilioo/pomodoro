@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TransactionResource\Pages;
-use App\Filament\Resources\TransactionResource\RelationManagers;
 use App\Models\Transaction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TransactionResource extends Resource
 {
@@ -33,7 +30,7 @@ class TransactionResource extends Resource
                 Forms\Components\TextInput::make('price')
                     ->label('Price')
                     ->required()
-                    ->numeric()
+                    ->numeric(),
             ]);
     }
 
@@ -51,7 +48,7 @@ class TransactionResource extends Resource
                     ->searchable()
                     ->numeric()
                     ->formatStateUsing(function ($state) {
-                        return $state ? '$ ' . number_format($state, 2) : '—';
+                        return $state ? '$ '.number_format($state, 2) : '—';
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created at')

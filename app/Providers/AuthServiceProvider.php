@@ -8,7 +8,6 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 class AuthServiceProvider extends ServiceProvider
 {
-
     /**
      * As políticas de autorização da aplicação.
      *

@@ -3,15 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PomodoroSessionResource\Pages;
-use App\Filament\Resources\PomodoroSessionResource\RelationManagers;
 use App\Models\PomodoroSession;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PomodoroSessionResource extends Resource
 {
@@ -55,8 +51,8 @@ class PomodoroSessionResource extends Resource
                     ->time()
                     ->sortable()
                     ->searchable()
-                    ->formatStateUsing(function($state){
-                        return $state ? $state . ' minute(s)' : '—';
+                    ->formatStateUsing(function ($state) {
+                        return $state ? $state.' minute(s)' : '—';
                     }),
                 Tables\Columns\TextColumn::make('started_at')
                     ->label('Started at')
@@ -85,7 +81,7 @@ class PomodoroSessionResource extends Resource
                 // Tables\Actions\ReplicateAction::make()->label(''),
             ])
             ->bulkActions([
-                // 
+                //
             ]);
     }
 

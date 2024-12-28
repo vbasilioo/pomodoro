@@ -16,11 +16,13 @@ class TransactionLedger extends Model
         'amount',
     ];
 
-    public function transaction(){
+    public function transaction()
+    {
         return $this->belongsTo(Transaction::class, 'transaction_id');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 }

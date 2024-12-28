@@ -14,7 +14,8 @@ class ProductType extends Model
         'description',
     ];
 
-    public function products(){
+    public function products()
+    {
         return $this->hasMany(Product::class, 'product_type_id');
     }
 }
