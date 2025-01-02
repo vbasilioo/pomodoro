@@ -1,26 +1,20 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Wallet;
 
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TransactionLedger extends Model
+class Wallet extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'transaction_id',
         'user_id',
-        'type',
-        'amount',
+        'balance',
     ];
-
-    public function transaction(): BelongsTo
-    {
-        return $this->belongsTo(Transaction::class, 'transaction_id');
-    }
 
     public function user(): BelongsTo
     {

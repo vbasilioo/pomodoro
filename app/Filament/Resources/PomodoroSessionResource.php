@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PomodoroSessionResource\Pages;
-use App\Models\PomodoroSession;
+use App\Models\Pomodoro;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -11,7 +11,7 @@ use Filament\Tables\Table;
 
 class PomodoroSessionResource extends Resource
 {
-    protected static ?string $model = PomodoroSession::class;
+    protected static ?string $model = Pomodoro::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clock';
 

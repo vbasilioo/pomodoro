@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Marketplace;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductType extends Model
+class Type extends Model
 {
     use SoftDeletes;
 

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\PomodoroSession;
-use App\Models\User;
+use App\Models\Pomodoro;
+use App\Models\User\User;
 use Illuminate\Database\Seeder;
 
 class PomodoroSessionSeeder extends Seeder
@@ -16,7 +16,7 @@ class PomodoroSessionSeeder extends Seeder
         $users = User::all();
 
         foreach ($users as $user) {
-            PomodoroSession::create([
+            Pomodoro::create([
                 'user_id' => $user->id,
                 'pomodoro_type' => 'focus',
                 'time_expected' => 60,

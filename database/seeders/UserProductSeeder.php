@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
-use App\Models\User;
-use App\Models\UserProduct;
+use App\Models\Marketplace\Product;
+use App\Models\User\User;
+use App\Models\User\UserProduct;
 use Illuminate\Database\Seeder;
 
 class UserProductSeeder extends Seeder
@@ -22,7 +22,7 @@ class UserProductSeeder extends Seeder
                 'user_id' => $user->id,
                 'product_id' => $product->id,
                 'bought_at' => now(),
-            ]) : 
+            ]) :
             throw new \Exception('User or product not found.');
     }
 }

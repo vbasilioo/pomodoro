@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserProductResource\Pages;
-use App\Models\UserProduct;
+use App\Models\User\UserProduct;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;

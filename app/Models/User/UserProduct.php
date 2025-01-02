@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
+use App\Models\Marketplace\Product;
+use App\Models\Marketplace\Type;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,6 +30,6 @@ class UserProduct extends Model
 
     public function productType()
     {
-        return $this->belongsToThrough(ProductType::class, Product::class);
+        return $this->belongsToThrough(Type::class, Product::class);
     }
 }

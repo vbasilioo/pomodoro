@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
-use App\Models\ProductType;
+use App\Models\Marketplace\Product;
+use App\Models\Marketplace\Type;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -13,9 +13,9 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $productType = ProductType::first();
+        $productType = Type::first();
 
-        $productType ? 
+        $productType ?
             Product::create([
                 'product_type_id' => $productType->id,
                 'price' => 99.99,

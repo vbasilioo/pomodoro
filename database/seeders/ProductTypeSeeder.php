@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\ProductType;
+use App\Models\Marketplace\Type;
 use Illuminate\Database\Seeder;
 
 class ProductTypeSeeder extends Seeder
@@ -12,7 +12,7 @@ class ProductTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        ProductType::create([
+        Type::create([
             'name' => 'Electronics',
             'description' => 'Devices and gadgets',
         ]);
