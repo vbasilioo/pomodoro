@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductTypeResource\Pages;
-use App\Models\ProductType;
+use App\Models\Marketplace\Type;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,7 +12,7 @@ use Filament\Tables\Table;
 
 class ProductTypeResource extends Resource
 {
-    protected static ?string $model = ProductType::class;
+    protected static ?string $model = Type::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
 

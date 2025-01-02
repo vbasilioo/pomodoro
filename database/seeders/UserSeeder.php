@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\User\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -16,17 +17,17 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'email' => 'admin@mail.com',
-                'password' => bcrypt('password'),
             ],
             [
                 'name' => 'Vinícius',
                 'email' => 'vinicius@mail.com',
-                'password' => bcrypt('password'),
             ],
         ];
 
         foreach ($users as $userData) {
-            User::create($userData);
+            User::query()->firstOrCreate($userData, [
+                'password' => Hash::make('password'),
+            ]);
         }
     }
 }

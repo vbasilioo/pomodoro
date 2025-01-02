@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\WalletResource\Pages;
-use App\Models\Wallet;
+use App\Models\Wallet\Wallet;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -54,7 +54,8 @@ class WalletResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('balance')->sortable()->searchable()->label('Balance')
                     ->formatStateUsing(function ($state) {
-                        $formattedBalance = is_numeric($state) ? '$ ' . number_format((float)$state, 2) : '-';
+                        $formattedBalance = is_numeric($state) ? '$ '.number_format((float) $state, 2) : '-';
+
                         return $formattedBalance;
                     }),
                 Tables\Columns\TextColumn::make('created_at')->sortable()->searchable()->label('Created at')->date(),

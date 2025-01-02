@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\User\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -35,13 +35,13 @@ class PermissionSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create([
+            Permission::query()->firstOrCreate([
                 'name' => $permission,
                 'guard_name' => 'web',
             ]);
         }
 
-        $productManagerRole = Role::create(['name' => 'Product Manager']);
+        $productManagerRole = Role::query()->firstOrCreate(['name' => 'Product Manager']);
         $productManagerRole->givePermissionTo([
             'view products',
             'create products',
@@ -49,7 +49,7 @@ class PermissionSeeder extends Seeder
             'delete products',
         ]);
 
-        $adminRole = Role::create(['name' => 'Admin']);
+        $adminRole = Role::query()->firstOrCreate(['name' => 'Admin']);
         $adminRole->givePermissionTo($permissions);
 
         $adminUser = User::find(1);

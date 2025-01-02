@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TransactionLedgerResource\Pages;
-use App\Models\TransactionLedger;
+use App\Models\Wallet\TransactionLedger;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -68,7 +68,8 @@ class TransactionLedgerResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->formatStateUsing(function ($state) {
-                        $formattedBalance = is_numeric($state) ? '$ ' . number_format((float)$state, 2) : '-';
+                        $formattedBalance = is_numeric($state) ? '$ '.number_format((float) $state, 2) : '-';
+
                         return $formattedBalance;
                     }),
                 Tables\Columns\TextColumn::make('user.name')
@@ -85,7 +86,8 @@ class TransactionLedgerResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->formatStateUsing(function ($state) {
-                        $formattedBalance = is_numeric($state) ? '$ ' . number_format((float)$state, 2) : '-';
+                        $formattedBalance = is_numeric($state) ? '$ '.number_format((float) $state, 2) : '-';
+
                         return $formattedBalance;
                     }),
                 Tables\Columns\TextColumn::make('created_at')
