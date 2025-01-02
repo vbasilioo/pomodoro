@@ -12,11 +12,18 @@ class Product extends Model
 
     protected $fillable = [
         'product_type_id',
+        'name',
         'price',
+        'context',
+    ];
+
+    protected $casts = [
+        'price' => 'double',
+        'context' => 'json',
     ];
 
     public function productType(): BelongsTo
     {
-        return $this->belongsTo(Type::class, 'product_type_id');
+        return $this->belongsTo(Type::class, 'product_type_id', 'id');
     }
 }
