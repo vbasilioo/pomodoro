@@ -12,9 +12,19 @@ class ProductTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        Type::create([
-            'name' => 'Electronics',
-            'description' => 'Devices and gadgets',
-        ]);
+        $productTypes = [
+            [
+                'name' => 'Eyes',
+                'description' => 'Types of eyes to your friend',
+            ],
+            [
+                'name' => 'Backgrounds',
+                'description' => 'Background colours to enhance your pomodoro session.',
+            ],
+        ];
+
+        foreach ($productTypes as $productType) {
+            Type::query()->firstOrCreate($productType);
+        }
     }
 }

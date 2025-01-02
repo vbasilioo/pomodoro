@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\ProductTypeEnum;
 use App\Models\Marketplace\Product;
-use App\Models\Marketplace\Type;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -13,14 +13,29 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $productType = Type::first();
+        $products = [
+            [
+                'product_type_id' => ProductTypeEnum::Face,
+                'name' => 'Mad eyes',
+                'price' => 199,
+                'context' => '{"eyes": "mad"}',
+            ],
+            [
+                'product_type_id' => ProductTypeEnum::Face,
+                'name' => 'Kind Eyes',
+                'price' => 200,
+                'context' => '{"eyes": "kind"}',
+            ],
+            [
+                'product_type_id' => ProductTypeEnum::Background,
+                'name' => 'Neon Background',
+                'price' => 200,
+                'context' => 'blue-background',
+            ],
+        ];
 
-        $productType ?
-            Product::create([
-                'product_type_id' => $productType->id,
-                'price' => 99.99,
-            ])
-        :
-            throw new \Exception('No product type found.');
+        foreach ($products as $product) {
+            Product::query()->firstOrCreate($product);
+        }
     }
 }
