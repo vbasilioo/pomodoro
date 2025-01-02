@@ -11,6 +11,8 @@ class Pomodoro extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'pomodoro_sessions';
+
     protected $fillable = [
         'user_id',
         'pomodoro_type',
@@ -22,6 +24,6 @@ class Pomodoro extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

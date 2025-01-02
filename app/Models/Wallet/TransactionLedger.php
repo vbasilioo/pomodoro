@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TransactionLedger extends Model
 {
     use SoftDeletes;
+    
+    protected $table = 'transaction_ledgers';
 
     protected $fillable = [
         'transaction_id',
