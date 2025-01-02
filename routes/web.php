@@ -8,3 +8,13 @@ Route::get('/', function () {
 });
 
 Route::get('/switch-language/{locale}', [LangagueSwitchController::class, 'switch'])->name('locale.switch');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
