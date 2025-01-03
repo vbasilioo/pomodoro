@@ -32,15 +32,30 @@
                 <div class="flex justify-between items-center mb-3">
                     <div>
                         <h2 class="text-3xl font-bold text-center">FocusFriend.io</h2>
-                        <span class="text-xl font-bold text-center">Olá {{ auth()->check() ? auth()->user()->name : 'Usuário' }}</span>
+                        <span class="text-xl font-bold text-center">
+                            Olá
+                            @auth
+                            {{ auth()->user()->name }}
+                            @endauth
+                            @guest
+                            Usuário
+                            @endguest
+                        </span>
                     </div>
                     <button class="text-amber-700 text-4xl font-bold" onclick="toggleSideBar()">X</button>
                 </div>
 
-                <div class="flex items-center space-x-2 px-2 rounded-full w-44 bg-amber-800 bg-opacity-10 mb-8">
+                <div class="flex items-center space-x-2 px-2 rounded-full w-52 bg-amber-800 bg-opacity-10 mb-8">
                     <img src="{{ asset('images/focuspoints_icon.svg') }}" alt="Icone dos focus points" class="size-4">
                     <span class="text-lg font-bold">Focus Points:</span>
-                    <span class="text-xl font-bold">0</span>
+                    <span class="text-xl font-bold">
+                        @auth
+                        {{ auth()->user()->wallet->balance }}
+                        @endauth
+                        @guest
+                        0
+                        @endguest
+                    </span>
                 </div>
 
                 @livewire('background-changer')
@@ -105,9 +120,19 @@
                 </div>
 
                 <div class="text-center flex flex-col justify-center items-center space-y-2">
+                    @guest
                     <button class="bg-blue-500 text-white px-6 py-2 rounded-lg w-1/2 hover:bg-blue-600">
                         <a href="/login">Login</a>
                     </button>
+                    @endguest
+                    @auth
+                    <form method="POST" action="{{ route('logout') }}" class="bg-green-500 text-white px-6 py-2 rounded-lg w-1/2 hover:bg-green-600">
+                        @csrf
+                        <button type="submit">
+                            Sair
+                        </button>
+                    </form>
+                    @endauth
                     <button class="bg-red-500 text-white px-6 py-2 rounded-lg w-1/2 hover:bg-red-600">
                         Report Bug
                     </button>
