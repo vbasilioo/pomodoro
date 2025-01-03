@@ -19,7 +19,7 @@
     @livewireStyles
 </head>
 
-<body id="body" class="bg-primaryBlue font-sans flex flex-col items-center justify-center h-screen">
+<body id="body" class="bg-primaryBlue font-sans flex flex-col items-center justify-center h-screen transition-colors duration-500">
     <div>
         <button class="absolute top-4 right-4 text-white focus:outline-none" onclick="toggleSideBar()">
             <svg id="toggle-icon" class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -28,42 +28,87 @@
         </button>
 
         <div id="sidebar" class="fixed top-0 right-0 h-full w-2/5 bg-sideBar shadow-lg transform translate-x-full transition-transform duration-300 overflow-y-auto">
-            <div class="p-6">
-
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-3xl font-bold text-center">FocusFriend.io</h2>
+            <div class="p-5">
+                <div class="flex justify-between items-center mb-3">
+                    <div>
+                        <h2 class="text-3xl font-bold text-center">FocusFriend.io</h2>
+                        <span class="text-xl font-bold text-center">Olá {{ auth()->check() ? auth()->user()->name : 'Usuário' }}</span>
+                    </div>
                     <button class="text-amber-700 text-4xl font-bold" onclick="toggleSideBar()">X</button>
                 </div>
 
-                <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center space-x-2 px-2 rounded-full w-44 bg-amber-800 bg-opacity-10 mb-8">
+                    <img src="{{ asset('images/focuspoints_icon.svg') }}" alt="Icone dos focus points" class="size-4">
                     <span class="text-lg font-bold">Focus Points:</span>
                     <span class="text-xl font-bold">0</span>
                 </div>
 
                 @livewire('background-changer')
 
-                <div class="mb-8">
+                <div class="p-6 mb-4 bg-[#FFF8E5] rounded-lg shadow-md">
                     <h3 class="text-xl font-bold mb-4">Settings</h3>
+
                     <div class="flex items-center mb-4">
-                        <input type="radio" name="settings" id="standard" class="mr-2">
-                        <label for="standard" class="text-lg font-medium">Standard</label>
+                        <input
+                            type="radio"
+                            name="settings"
+                            id="standard"
+                            value="standard"
+                            wire:model="mode"
+                            class="form-radio w-5 h-5 text-[#000] border-gray-400 focus:ring-[#000] focus:outline-none">
+                        <label for="standard" class="ml-2 text-lg font-medium cursor-pointer">Standard</label>
                     </div>
+
                     <div class="flex items-center mb-4">
-                        <input type="radio" name="settings" id="custom" class="mr-2">
-                        <label for="custom" class="text-lg font-medium">Custom</label>
+                        <input
+                            type="radio"
+                            name="settings"
+                            id="custom"
+                            value="custom"
+                            wire:model="mode"
+                            class="form-radio w-5 h-5 text-[#000] border-gray-400 focus:ring-[#000] focus:outline-none">
+                        <label for="custom" class="ml-2 text-lg font-medium cursor-pointer">Custom</label>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-lg">Auto Start Focus</span>
-                        <input type="checkbox" class="toggle">
+
+                    <div class="grid grid-cols-3 gap-4 mb-6">
+                        <div>
+                            <label class="text-sm font-medium mb-1 block">Pomodoro (min)</label>
+                            <input
+                                type="number"
+                                wire:model="pomodoro"
+                                class="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm text-lg text-center focus:ring-2 focus:ring-[#000] focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium mb-1 block">Break (min)</label>
+                            <input
+                                type="number"
+                                wire:model="break"
+                                class="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm text-lg text-center focus:ring-2 focus:ring-[#000] focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium mb-1 block">Long Break (min)</label>
+                            <input
+                                type="number"
+                                wire:model="longBreak"
+                                class="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm text-lg text-center focus:ring-2 focus:ring-[#000] focus:outline-none">
+                        </div>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-lg">Auto Start Breaks</span>
-                        <input type="checkbox" class="toggle">
+
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Current Settings:</h4>
+                        <ul class="list-disc ml-6">
+                            <li>Pomodoro: 25 min</li>
+                            <li>Break: 10 min</li>
+                            <li>Long Break: 60 min</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="text-center">
-                    <button class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600">
+                <div class="text-center flex flex-col justify-center items-center space-y-2">
+                    <button class="bg-blue-500 text-white px-6 py-2 rounded-lg w-1/2 hover:bg-blue-600">
+                        <a href="/login">Login</a>
+                    </button>
+                    <button class="bg-red-500 text-white px-6 py-2 rounded-lg w-1/2 hover:bg-red-600">
                         Report Bug
                     </button>
                 </div>
@@ -128,8 +173,8 @@
 
         document.addEventListener('livewire:init', () => {
             Livewire.on('changeBackgroundColor', (event) => {
-                const bgColor = event[0].bgColor; 
-                document.getElementById('body').className = `${bgColor} font-sans flex flex-col items-center justify-center h-screen`;
+                const bgColor = event[0].bgColor;
+                document.getElementById('body').className = `${bgColor} font-sans flex flex-col items-center justify-center h-screen transition-colors duration-500`;
             });
         });
     </script>
