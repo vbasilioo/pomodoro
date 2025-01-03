@@ -1,4 +1,4 @@
-<div class="bg-opacity-95 bg-focus rounded-lg shadow-lg p-6 w-1/4 text-center">
+<div class="bg-opacity-20 bg-white rounded-lg shadow-lg p-6 w-1/4 text-center">
     <div class="flex justify-center items-center gap-4 mb-6">
         <button id="setFocus" class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white shadow-sm">FOCUS</button>
         <button id="setBreak" class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white shadow-sm">BREAK</button>
