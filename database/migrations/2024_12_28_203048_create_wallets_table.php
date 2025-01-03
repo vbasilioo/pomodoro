@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('user_id');
-            $table->double('balance');
+            $table->integer('balance')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

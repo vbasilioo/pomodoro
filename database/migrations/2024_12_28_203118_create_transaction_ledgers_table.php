@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('transaction_id');
             $table->unsignedBigInteger('user_id');
             $table->enum('type', ['credit', 'debit'])->default('credit');
-            $table->double('amount');
+            $table->integer('amount');
             $table->timestamps();
             $table->softDeletes();
 
