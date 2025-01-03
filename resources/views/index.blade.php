@@ -19,8 +19,7 @@
     @livewireStyles
 </head>
 
-<body class="bg-primaryBlue font-sans flex flex-col items-center justify-center h-screen">
-
+<body id="body" class="bg-primaryBlue font-sans flex flex-col items-center justify-center h-screen">
     <div>
         <button class="absolute top-4 right-4 text-white focus:outline-none" onclick="toggleSideBar()">
             <svg id="toggle-icon" class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -41,41 +40,7 @@
                     <span class="text-xl font-bold">0</span>
                 </div>
 
-                <div class="grid grid-cols-5 gap-0 mb-8">
-                    <button onclick="changeBackgroundColor('bg-primaryPurple')" class="bg-primaryPurple w-full h-28 rounded-lg flex items-center justify-center text-white focus:border-4 focus:border-black transform hover:scale-110 transition-transform duration-200">
-                        @livewire('face-button', ['isPurchased' => true])
-                    </button>
-                    <button onclick="changeBackgroundColor('bg-primaryBlue')" class="bg-primaryBlue w-full h-28 rounded-lg flex items-center justify-center text-white focus:border-4 focus:border-black transform hover:scale-110 transition-transform duration-200 -ml-2">
-                        @livewire('face-button', ['isPurchased' => true])
-                    </button>
-                    <button class="bg-primaryOrange w-full h-28 rounded-lg flex items-center justify-center text-white focus:border-4 focus:border-black transform hover:scale-110 transition-transform duration-200 -ml-4">
-                        @livewire('face-button', ['isPurchased' => false])
-                    </button>
-                    <button class="bg-primaryYellow w-full h-28 rounded-lg flex items-center justify-center text-white focus:border-4 focus:border-black transform hover:scale-110 transition-transform duration-200 -ml-6">
-                        @livewire('face-button', ['isPurchased' => false])
-                    </button>
-                    <button class="bg-primaryGreen w-full h-28 rounded-lg flex items-center justify-center text-white focus:border-4 focus:border-black transform hover:scale-110 transition-transform duration-200 -ml-8">
-                        @livewire('face-button', ['isPurchased' => false])
-                    </button>
-                </div>
-
-                <div class="grid grid-cols-5 gap-0 mb-8">
-                    <button class="bg-primaryPink w-full h-28 rounded-lg flex items-center justify-center text-white focus:border-4 focus:border-black transform hover:scale-110 transition-transform duration-200">
-                        @livewire('face-button', ['isPurchased' => false])
-                    </button>
-                    <button class="bg-primaryDefault w-full h-28 rounded-lg flex items-center justify-center text-white focus:border-4 focus:border-black transform hover:scale-110 transition-transform duration-200 -ml-2">
-                        @livewire('face-button', ['isPurchased' => false])
-                    </button>
-                    <button class="bg-primaryDefault w-full h-28 rounded-lg flex items-center justify-center text-white focus:border-4 focus:border-black transform hover:scale-110 transition-transform duration-200 -ml-4">
-                        @livewire('face-button', ['isPurchased' => false])
-                    </button>
-                    <button class="bg-primaryDefault w-full h-28 rounded-lg flex items-center justify-center text-white focus:border-4 focus:border-black transform hover:scale-110 transition-transform duration-200 -ml-6">
-                        @livewire('face-button', ['isPurchased' => false])
-                    </button>
-                    <button class="bg-primaryDefault w-full h-28 rounded-lg flex items-center justify-center text-white focus:border-4 focus:border-black transform hover:scale-110 transition-transform duration-200 -ml-8">
-                        @livewire('face-button', ['isPurchased' => false])
-                    </button>
-                </div>
+                @livewire('background-changer')
 
                 <div class="mb-8">
                     <h3 class="text-xl font-bold mb-4">Settings</h3>
@@ -115,7 +80,10 @@
                 <img id="eye-right" src="{{ asset('images/03_pupil.svg') }}" class="size-9 absolute" onclick="changeEyeImage()">
             </div>
         </div>
-        <div class="w-48 h-7  bg-black border-8 border-borderMouth rounded-full mt-4"></div>
+        <div class="relative w-48 h-7 mt-4">
+            <div class="absolute inset-0 w-full h-full border-white border-8 border-opacity-35 rounded-full"></div>
+            <div class="w-44 absolute inset-0 h-3 bg-black rounded-full m-auto"></div>
+        </div>
     </div>
 
     @livewire('pomodoro-timer')
@@ -132,10 +100,6 @@
                 sidebar.classList.add("translate-x-full");
                 toggleIconPath.setAttribute("d", "M4 6h16M4 12h16m-7 6h7");
             }
-        }
-
-        function changeBackgroundColor(color) {
-            document.body.className = color;
         }
 
         const eyeImages = [
@@ -161,6 +125,13 @@
             leftEye.src = eyeImages[nextIndex];
             rightEye.src = eyeImages[nextIndex];
         }
+
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('changeBackgroundColor', (event) => {
+                const bgColor = event[0].bgColor; 
+                document.getElementById('body').className = `${bgColor} font-sans flex flex-col items-center justify-center h-screen`;
+            });
+        });
     </script>
 
     @livewireScripts
