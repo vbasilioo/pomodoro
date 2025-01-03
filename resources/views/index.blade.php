@@ -121,9 +121,14 @@
 
                 <div class="text-center flex flex-col justify-center items-center space-y-2">
                     @guest
-                    <button class="bg-blue-500 text-white px-6 py-2 rounded-lg w-1/2 hover:bg-blue-600">
-                        <a href="/login">Login</a>
-                    </button>
+                    <div class="flex space-x-4 w-full">
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg w-1/2 hover:bg-blue-600">
+                            <a href="/login">Login</a>
+                        </button>
+                        <button class="bg-yellow-500 text-white px-6 py-2 rounded-lg w-1/2 hover:bg-yellow-600">
+                            <a href="/register">Register</a>
+                        </button>
+                    </div>
                     @endguest
                     @auth
                     <form method="POST" action="{{ route('logout') }}" class="bg-green-500 text-white px-6 py-2 rounded-lg w-1/2 hover:bg-green-600">
