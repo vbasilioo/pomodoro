@@ -24,13 +24,14 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens;
-
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, HasRoles, Notifiable, SoftDeletes;
-
+    use HasFactory;
+    use HasRoles;
+    use SoftDeletes;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.

@@ -11,6 +11,8 @@ class Wallet extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'wallets';
+
     protected $fillable = [
         'user_id',
         'balance',

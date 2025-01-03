@@ -12,6 +12,8 @@ class UserProduct extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'user_products';
+
     protected $fillable = [
         'user_id',
         'product_id',
