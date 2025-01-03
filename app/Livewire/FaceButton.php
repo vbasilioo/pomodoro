@@ -15,6 +15,6 @@ class FaceButton extends Component
 
     public function render()
     {
-        return view('livewire.face-button');
+        return view('livewire.face-button', ['isPurchased' => $this->isPurchased]);
     }
 }
