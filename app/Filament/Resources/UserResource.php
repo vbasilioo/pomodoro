@@ -9,6 +9,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
 
 class UserResource extends Resource
 {
@@ -53,11 +56,41 @@ class UserResource extends Resource
                 Tables\Actions\EditAction::make()->label(''),
                 Tables\Actions\RestoreAction::make()->label(''),
                 Tables\Actions\DeleteAction::make()->label(''),
-                Tables\Actions\ReplicateAction::make()->label(''),
+                Tables\Actions\ReplicateAction::make()->label(''),              
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
+                Tables\Actions\BulkAction::make('exportPdf')
+                    ->label('Export PDF')
+                    ->icon('heroicon-o-document')
+                    ->action(function (\Illuminate\Support\Collection $records) {
+                        $users = $records->all();
+                        $pdf = Pdf::loadView('pdf.users', ['users' => $users]);
+                        return response()->streamDownload(fn() => print($pdf->output()), 'users.pdf');
+                    })
+                    ->requiresConfirmation()
+                    ->color('primary'),
+                Tables\Actions\BulkAction::make('emailData')
+                    ->label('Send to E-mail')
+                    ->icon('heroicon-o-inbox')
+                    ->action(function (\Illuminate\Support\Collection $records) {
+                        $users = $records->all();
+                
+                        $pdf = Pdf::loadView('pdf.users', ['users' => $users]);
+                
+                        \Mail::send([], [], function ($message) use ($pdf) {
+                            $message->to('vbasilio2019@gmail.com')
+                                ->subject('User Report')
+                                ->attachData($pdf->output(), 'users.pdf', [
+                                    'mime' => 'application/pdf',
+                                ]);
+                        });
+                
+                        // Log::info('success', 'Email enviado com sucesso!');
+                    })
+                    ->requiresConfirmation()
+                    ->color('success'),                
             ]);
     }
 
