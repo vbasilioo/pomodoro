@@ -22,4 +22,9 @@
     </div>
 </div>
 
-<script></script>
+<script>
+    function notifyPomodoroComplete() {
+        console.log('Acessei a função notifyPomodoroComplete');
+        Livewire.dispatch('PomodoroCompleted');
+    }
+</script>

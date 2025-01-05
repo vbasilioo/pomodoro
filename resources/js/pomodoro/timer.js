@@ -1,6 +1,6 @@
 export function initializePomodoroTimer() {
     let interval = null;
-    let timeRemaining = 1500;
+    let timeRemaining = 15;
     let timerRunning = false;
 
     function updateDisplay() {
@@ -25,6 +25,7 @@ export function initializePomodoroTimer() {
                     clearInterval(interval);
                     interval = null;
                     timerRunning = false;
+                    notifyPomodoroComplete();
                 }
             }, 1000);
         }
@@ -43,12 +44,11 @@ export function initializePomodoroTimer() {
     }
 
     function skipTimer() {
-        timeRemaining = 5 * 60; // Modo BREAK
+        timeRemaining = 5 * 60;
         updateDisplay();
         startTimer();
     }
 
-    // Event Listeners
     document.getElementById("startTimer").addEventListener("click", startTimer);
     document.getElementById("pauseTimer").addEventListener("click", pauseTimer);
     document.getElementById("skipTimer").addEventListener("click", skipTimer);
