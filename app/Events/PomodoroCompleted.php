@@ -4,16 +4,13 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
 class PomodoroCompleted implements ShouldBroadcast
 {
-    use InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public string $message;
 
@@ -35,7 +32,8 @@ class PomodoroCompleted implements ShouldBroadcast
         return new Channel('pomodoro');
     }
 
-    public function broadcastAs(){
+    public function broadcastAs()
+    {
         return 'PomodoroCompleted';
     }
 }
