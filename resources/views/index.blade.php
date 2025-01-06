@@ -161,7 +161,7 @@
         </div>
     </div>
 
-    @livewire('pomodoro-timer')
+    <livewire:pomodoro-timer/>
 
     <script>
         function toggleSideBar() {
