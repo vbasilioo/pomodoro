@@ -17,7 +17,7 @@ window.Echo.channel('pomodoro')
     .subscribed(() => {
         console.log("Conectado ao canal pomodoro");
     })
-    .listen('PomodoroCompleted', (e) => {
+    .listen('.PomodoroCompleted', (e) => {
         alert(`Pomodoro finalizado: ${e.message}`);
         console.log(`Evento recebido (pomodoro finalizado): ${e.message}`);
     });

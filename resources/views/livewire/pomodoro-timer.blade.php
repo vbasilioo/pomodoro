@@ -24,7 +24,10 @@
 
 <script>
     function notifyPomodoroComplete() {
-        console.log('Acessei a função notifyPomodoroComplete');
-        Livewire.dispatch('PomodoroCompleted');
+        Livewire.dispatch('completePomodoro');
     }
+
+    document.addEventListener('livewire:init', () => {
+        notifyPomodoroComplete();
+    });
 </script>
