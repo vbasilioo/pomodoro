@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Pomodoro;
 use App\Models\Wallet\Wallet;
 use App\Observers\UserObserver;
 use Database\Factories\UserFactory;
@@ -78,6 +79,13 @@ class User extends Authenticatable implements FilamentUser
     public function wallet(): HasOne
     {
         return $this->hasOne(Wallet::class, 'user_id', 'id');
+    }
+
+    public function pomodoro(): HasOne
+    {
+        return $this->hasOne(Pomodoro::class, 'user_id', 'id')
+            ->whereNull('finished_at')
+            ->whereNull('abandoned_at');
     }
 
     protected static function newFactory(): UserFactory
