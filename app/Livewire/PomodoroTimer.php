@@ -3,16 +3,19 @@
 namespace App\Livewire;
 
 use App\Events\PomodoroCompleted;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
-class PomodoroTimer extends Component {
+class PomodoroTimer extends Component
+{
+    protected $listeners = ['completePomodoro'];
 
-    public function completePomodoro(){
-        $this->dispatch(new PomodoroCompleted('Parabéns! Você completou o período Pomodoro!'));
+    public function completePomodoro()
+    {
+        PomodoroCompleted::dispatch('Pomodoro completed!');
     }
 
-    public function render() {
+    public function render()
+    {
         return view('livewire.pomodoro-timer');
     }
 }
