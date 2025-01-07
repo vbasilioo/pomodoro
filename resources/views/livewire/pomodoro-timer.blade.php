@@ -12,12 +12,14 @@
         </button>
     </div>
 
-    <div id="timerDisplay" class="text-7xl font-extrabold mb-6 text-white">
-        @if(isset($pomodoro))
-            {{ sprintf('%02d:%02d', intdiv($pomodoro->time_expected, 60), $pomodoro->time_expected % 60) }}
-        @else
-            00:00
-        @endif
+    <div wire:poll.1000ms="decrementTime">
+        <div id="timerDisplay" class="text-7xl font-extrabold mb-6 text-white">
+            @if(isset($pomodoro))
+                {{ sprintf('%02d:%02d', intdiv($pomodoro->time_expected, 60), $pomodoro->time_expected % 60) }}
+            @else
+                00:00
+            @endif
+        </div>
     </div>
 
     <div class="flex">
