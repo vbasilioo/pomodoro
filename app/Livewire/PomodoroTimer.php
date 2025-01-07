@@ -18,9 +18,15 @@ class PomodoroTimer extends Component
 
     public ?Pomodoro $pomodoro = null;
 
-    public PomodoroTypeEnum $type;
+    public PomodoroTypeEnum $type = PomodoroTypeEnum::Regular;
 
     public int $timeExpected;
+
+    public function mount()
+    {
+        if (is_null($this->type))
+            $this->type = PomodoroTypeEnum::Regular;
+    }
 
     public function completePomodoro()
     {
@@ -108,7 +114,6 @@ class PomodoroTimer extends Component
     {
         $this->pomodoro->update([
             'pomodoro_status' => PomodoroStatusEnum::Running,
-            'started_at' => now(),
         ]);
 
         $this->dispatch('pomodoroStatus', [
@@ -161,5 +166,15 @@ class PomodoroTimer extends Component
                 'type' => PomodoroTypeEnum::Break
             ],
         };
+    }
+
+    public function decrementTime()
+    {
+        if($this->pomodoro && $this->pomodoro->time_expected > 0){
+            $this->pomodoro->time_expected -= 1;
+            $this->pomodoro->save();
+        }else{
+            $this->dispatch('pomodoroCompleted');
+        }
     }
 }

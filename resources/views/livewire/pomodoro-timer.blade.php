@@ -23,28 +23,35 @@
     </div>
 
     <div class="flex">
-        @if(isset($pomodoro) && !$pomodoro->checkStatus(PomodoroStatusEnum::Abandoned))
-            @if ($pomodoro->checkStatus(PomodoroStatusEnum::Paused))
-                <button wire:click="resumePomodoro"
-                        class="bg-white border-4 border-b-8 justify-start flex border-black px-4 py-2 rounded-md font-bold">
-                    RESUME
+        @auth
+            @if(isset($pomodoro) && !$pomodoro->checkStatus(PomodoroStatusEnum::Abandoned))
+                @if ($pomodoro->checkStatus(PomodoroStatusEnum::Paused))
+                    <button wire:click="resumePomodoro"
+                            class="bg-white border-4 border-b-8 justify-start flex border-black px-4 py-2 rounded-md font-bold">
+                        RESUME
+                    </button>
+                @else
+                    <button wire:click="pausePomodoro"
+                            class="bg-white border-4 border-b-8 justify-start flex border-black px-4 py-2 rounded-md font-bold ml-2">
+                        PAUSE
+                    </button>
+                @endif
+                <button wire:click="abandonPomodoro"
+                        class="bg-white border-4 border-b-8 justify-start flex border-black px-4 py-2 rounded-md font-bold ml-2">
+                    SKIP
                 </button>
             @else
-                <button wire:click="pausePomodoro"
-                        class="bg-white border-4 border-b-8 justify-start flex border-black px-4 py-2 rounded-md font-bold ml-2">
-                    PAUSE
+                <button wire:click="startPomodoro" id="startTimer"
+                        class="bg-white border-4 border-b-8 justify-start flex border-black px-4 py-2 rounded-md font-bold">
+                    START
                 </button>
             @endif
-            <button wire:click="abandonPomodoro"
-                    class="bg-white border-4 border-b-8 justify-start flex border-black px-4 py-2 rounded-md font-bold ml-2">
-                SKIP
-            </button>
-        @else
-            <button wire:click="startPomodoro" id="startTimer"
-                    class="bg-white border-4 border-b-8 justify-start flex border-black px-4 py-2 rounded-md font-bold">
-                START
-            </button>
-        @endif
+        @endauth
+        @guest
+            <div class="text-white flex justify-center items-center">
+            And there. Before you can use Pomodoro, register or log in to your account. This measure is used to ensure that points are correctly deposited into your account.
+            </div>
+        @endguest
     </div>
 </div>
 
