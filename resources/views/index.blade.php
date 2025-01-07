@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Pomodoro</title>
+    <title>FocusFriends.io</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/05_pupil.svg') }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -33,12 +34,12 @@
                     <div>
                         <h2 class="text-3xl font-bold text-center">FocusFriend.io</h2>
                         <span class="text-xl font-bold text-center">
-                            Olá
+                            Olá,
                             @auth
-                            {{ auth()->user()->name }}
+                                {{ auth()->user()->name }}.
                             @endauth
                             @guest
-                            Usuário
+                                Usuário.
                             @endguest
                         </span>
                     </div>
@@ -50,10 +51,10 @@
                     <span class="text-lg font-bold">Focus Points:</span>
                     <span class="text-xl font-bold">
                         @auth
-                        {{ auth()->user()->wallet->balance }}
+                            {{ auth()->user()->wallet->balance }}
                         @endauth
                         @guest
-                        0
+                            0
                         @endguest
                     </span>
                 </div>
