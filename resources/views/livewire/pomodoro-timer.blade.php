@@ -56,7 +56,7 @@
 </div>
 
 <script>
-    let timeRemaining = {{ $pomodoro?->time_remaining }};
+    let timeRemaining = {{ $pomodoro?->time_expected ?? 0 }};
     let timerInterval = null;
 
     function updateDisplay() {

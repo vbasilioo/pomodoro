@@ -53,9 +53,9 @@ class PomodoroTimer extends Component
                 $this->pomodoro = $pomodoro;
 
                 if ($pomodoro->checkStatus(PomodoroStatusEnum::Running)) {
-                    $elapsedTime = Carbon::now()->diffInSeconds(Carbon::parse($pomodoro->started_at));
-
-                    $this->pomodoro->time_expected = max(0, $pomodoro->time_expected - $elapsedTime);
+                    $elapsedTime = Carbon::parse($pomodoro->started_at)->diffInSeconds(now());
+                    
+                    $this->timeExpected = max(0, $pomodoro->time_expected - $elapsedTime);
 
                     if ($this->pomodoro->time_expected === 0) {
                         $this->completePomodoro();
@@ -76,16 +76,18 @@ class PomodoroTimer extends Component
 
     public function startPomodoro(): void
     {
+        $this->timeExpected = $this->checkTypeAndTimeExpected($this->type)['time_expected'];
+
         $pomodoro = auth()->user()->pomodoro()->create([
             'pomodoro_status' => PomodoroStatusEnum::Running,
-            'pomodoro_type' => $this->type ?? PomodoroTypeEnum::Regular,
-            'time_expected' => $this->timeExpected ?? 1500,
+            'pomodoro_type' => $this->type,
+            'time_expected' => $this->timeExpected,
             'started_at' => now(),
         ]);
 
         $this->dispatch('pomodoroStatus', [
             'status' => PomodoroStatusEnum::Running->value,
-            'time_remaining' => $this->timeExpected ?? 1500,
+            'time_remaining' => $this->timeExpected,
         ]);
 
         $this->isRunning = true;
