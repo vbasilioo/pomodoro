@@ -76,7 +76,7 @@ class PomodoroTimer extends Component
 
     public function startPomodoro(): void
     {
-        $this->timeExpected = $this->checkTypeAndTimeExpected($this->type)['time_expected'];
+        $this->timeExpected = $this->pomodoro->checkTypeAndTimeExpected($this->type)['time_expected'];
 
         $pomodoro = auth()->user()->pomodoro()->create([
             'pomodoro_status' => PomodoroStatusEnum::Running,
@@ -152,30 +152,16 @@ class PomodoroTimer extends Component
         $this->dispatch('updateTimeRemaining', ['timeRemaining' => $this->timeExpected]);
     }
 
-    public function checkTypeAndTimeExpected(PomodoroTypeEnum $typeEnum): array
-    {
-        return match ($typeEnum) {
-            PomodoroTypeEnum::Regular => [
-                'time_expected' => 1500,
-                'type' => PomodoroTypeEnum::Regular
-            ],
-            PomodoroTypeEnum::Custom => [
-                'time_expected' => 900,
-                'type' => PomodoroTypeEnum::Custom
-            ],
-            PomodoroTypeEnum::Break => [
-                'time_expected' => 300,
-                'type' => PomodoroTypeEnum::Break
-            ],
-        };
-    }
-
     public function decrementTime()
     {
-        if($this->pomodoro && $this->pomodoro->time_expected > 0){
+        if ($this->pomodoro && $this->pomodoro->time_expected > 0) {
             $this->pomodoro->time_expected -= 1;
             $this->pomodoro->save();
-        }else{
+            $this->dispatch('pomodoroStatus', [
+                'status' => $this->pomodoro->pomodoro_status,
+                'time_remaining' => $this->pomodoro->time_expected,
+            ]);
+        } else {
             $this->dispatch('pomodoroCompleted');
         }
     }

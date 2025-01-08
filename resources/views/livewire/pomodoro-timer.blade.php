@@ -64,6 +64,7 @@
         const seconds = timeRemaining % 60;
         document.getElementById("timerDisplay").textContent =
             `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        updateTitle();
     }
 
     function startTimer() {
@@ -75,6 +76,7 @@
             if (timeRemaining > 0) {
                 timeRemaining--;
                 updateDisplay();
+                updateTitle();
             } else {
                 clearInterval(timerInterval);
                 timerInterval = null;
@@ -94,11 +96,19 @@
         Livewire.dispatch('completePomodoro');
     }
 
+    function updateTitle() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        document.title = `${formattedTime} - FOCO`;
+    }
+
     document.addEventListener('livewire:load', () => {
         updateDisplay();
 
         Livewire.on('pomodoroStatus', (data) => {
             timeRemaining = data.time_remaining;
+            updateTitle();
             if (data.status === '{{ PomodoroStatusEnum::Running->value }}') {
                 startTimer();
             } else {
@@ -112,6 +122,8 @@
     });
 
     document.addEventListener('DOMContentLoaded', function () {
+        updateTitle();
+
         const focusButton = document.getElementById('setFocus');
         if (focusButton) {
             focusButton.focus();
