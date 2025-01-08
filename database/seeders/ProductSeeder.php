@@ -17,20 +17,20 @@ class ProductSeeder extends Seeder
             [
                 'product_type_id' => ProductTypeEnum::Face,
                 'name' => 'Mad eyes',
-                'price' => 199,
-                'context' => '{"eyes": "mad"}',
+                'price' => 1200,
+                'context' => 'primaryBlue',
             ],
             [
                 'product_type_id' => ProductTypeEnum::Face,
                 'name' => 'Kind Eyes',
-                'price' => 200,
-                'context' => '{"eyes": "kind"}',
+                'price' => 1200,
+                'context' => 'primaryPurple',
             ],
             [
                 'product_type_id' => ProductTypeEnum::Background,
                 'name' => 'Neon Background',
-                'price' => 200,
-                'context' => 'blue-background',
+                'price' => 1200,
+                'context' => 'primaryGreen',
             ],
         ];
 

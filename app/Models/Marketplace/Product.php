@@ -21,7 +21,6 @@ class Product extends Model
 
     protected $casts = [
         'price' => 'double',
-        'context' => 'json',
     ];
 
     public function productType(): BelongsTo
