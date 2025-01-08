@@ -20,7 +20,6 @@ class BackgroundChanger extends Component
 
     public function changeBackgroundColor($productId, $isPurchased)
     {
-        // Busca o produto pelo ID
         $product = Product::find($productId);
 
         if (!$product) {
@@ -28,10 +27,8 @@ class BackgroundChanger extends Component
             return;
         }
 
-        // Dispara SEMPRE a cor correta do produto
         $this->dispatch('changeBackgroundColor', ['bgColor' => 'bg-' . $product->context]);
 
-        // Lógica de compra/desbloqueio (somente se necessário)
         if (!$isPurchased) {
             $user = Auth::user();
             $wallet = $user->wallet;
@@ -41,7 +38,6 @@ class BackgroundChanger extends Component
                 return;
             }
 
-            // Atualiza o saldo e a tabela de itens comprados
             $wallet->update(['balance' => $wallet->balance - $product->price]);
             UserProduct::create([
                 'user_id' => $user->id,
