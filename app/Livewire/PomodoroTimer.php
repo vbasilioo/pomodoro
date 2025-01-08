@@ -76,7 +76,8 @@ class PomodoroTimer extends Component
 
     public function startPomodoro(): void
     {
-        $this->timeExpected = $this->pomodoro->checkTypeAndTimeExpected($this->type)['time_expected'];
+        $timeData = (new Pomodoro())->checkTypeAndTimeExpected($this->type);
+        $this->timeExpected = $timeData['time_expected'];
 
         $pomodoro = auth()->user()->pomodoro()->create([
             'pomodoro_status' => PomodoroStatusEnum::Running,
@@ -96,34 +97,39 @@ class PomodoroTimer extends Component
 
     public function pausePomodoro(): void
     {
-        $elapsedTime = Carbon::parse($this->pomodoro->started_at)->diffInSeconds();
-        $remainingTime = max(0, $this->pomodoro->time_expected - $elapsedTime);
+        if ($this->pomodoro && $this->pomodoro->checkStatus(PomodoroStatusEnum::Running)) {
+            $elapsedTime = Carbon::now()->diffInSeconds(Carbon::parse($this->pomodoro->started_at));
+            $remainingTime = max(0, $this->pomodoro->time_expected - $elapsedTime);
 
-        $this->pomodoro->update([
-            'pomodoro_status' => PomodoroStatusEnum::Paused,
-            'time_expected' => $remainingTime,
-        ]);
+            $this->pomodoro->update([
+                'pomodoro_status' => PomodoroStatusEnum::Paused,
+                'time_expected' => $remainingTime,
+            ]);
 
-        $this->dispatch('pomodoroStatus', [
-            'status' => PomodoroStatusEnum::Paused->value,
-            'time_remaining' => $remainingTime,
-        ]);
+            $this->dispatch('pomodoroStatus', [
+                'status' => PomodoroStatusEnum::Paused->value,
+                'time_remaining' => $remainingTime,
+            ]);
 
-        $this->isRunning = false;
+            $this->isRunning = false;
+        }
     }
 
     public function resumePomodoro(): void
     {
-        $this->pomodoro->update([
-            'pomodoro_status' => PomodoroStatusEnum::Running,
-        ]);
+        if ($this->pomodoro && $this->pomodoro->checkStatus(PomodoroStatusEnum::Paused)) {
+            $this->pomodoro->update([
+                'pomodoro_status' => PomodoroStatusEnum::Running,
+                'started_at' => now(),
+            ]);
 
-        $this->dispatch('pomodoroStatus', [
-            'status' => PomodoroStatusEnum::Running->value,
-            'time_remaining' => $this->pomodoro->time_expected,
-        ]);
+            $this->dispatch('pomodoroStatus', [
+                'status' => PomodoroStatusEnum::Running->value,
+                'time_remaining' => $this->pomodoro->time_expected,
+            ]);
 
-        $this->isRunning = true;
+            $this->isRunning = true;
+        }
     }
 
     public function abandonPomodoro(): void

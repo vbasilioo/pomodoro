@@ -111,7 +111,7 @@
             updateTitle();
             if (data.status === '{{ PomodoroStatusEnum::Running->value }}') {
                 startTimer();
-            } else {
+            } else if (data.status === '{{ PomodoroStatusEnum::Paused->value }}') {
                 pauseTimer();
             }
         });
