@@ -47,4 +47,22 @@ class Pomodoro extends Model
     {
         return is_null($this->finished_at) && is_null($this->abandoned_at);
     }
+
+    public function checkTypeAndTimeExpected(PomodoroTypeEnum $typeEnum): array
+    {
+        return match ($typeEnum) {
+            PomodoroTypeEnum::Regular => [
+                'time_expected' => 1500,
+                'type' => PomodoroTypeEnum::Regular
+            ],
+            PomodoroTypeEnum::Custom => [
+                'time_expected' => 900,
+                'type' => PomodoroTypeEnum::Custom
+            ],
+            PomodoroTypeEnum::Break => [
+                'time_expected' => 300,
+                'type' => PomodoroTypeEnum::Break
+            ],
+        };
+    }
 }
