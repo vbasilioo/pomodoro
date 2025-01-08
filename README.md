@@ -13,11 +13,10 @@
   - 
 
 - [x] Administrative Panel with Filament
-  - [ ] Forgot Password with send e-mail
-  - [ ] Implement charts in Filament Dashboard
-  - [ ] Implement Notifications for panel admin
+  - [X] Forgot Password with send e-mail
+  - [X] Implement charts in Filament Dashboard
+  - [X] Implement Notifications for panel admin
   - [ ] !Try translating into other languages
 
 ## FIX
-- [ ] Place scripts within separate .js files
-- [ ] 
+- [X] Place scripts within separate .js files
