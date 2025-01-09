@@ -135,7 +135,7 @@
                     <form method="POST" action="{{ route('logout') }}" class="bg-green-500 text-white px-6 py-2 rounded-lg w-1/2 hover:bg-green-600">
                         @csrf
                         <button type="submit">
-                            Sair
+                            Exit
                         </button>
                     </form>
                     @endauth
