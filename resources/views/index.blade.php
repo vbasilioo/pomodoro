@@ -34,7 +34,7 @@
                     <div>
                         <h2 class="text-3xl font-bold text-center">FocusFriend.io</h2>
                         <span class="text-xl font-bold text-center">
-                            Olá,
+                            Hello,
                             @auth
                                 {{ auth()->user()->name }}.
                             @endauth
