@@ -15,22 +15,64 @@ class ProductSeeder extends Seeder
     {
         $products = [
             [
-                'product_type_id' => ProductTypeEnum::Face,
-                'name' => 'Mad eyes',
+                'product_type_id' => ProductTypeEnum::Background,
+                'name' => 'Blue Background',
                 'price' => 1200,
                 'context' => 'primaryBlue',
             ],
             [
-                'product_type_id' => ProductTypeEnum::Face,
-                'name' => 'Kind Eyes',
+                'product_type_id' => ProductTypeEnum::Background,
+                'name' => 'Purple Background',
                 'price' => 1200,
                 'context' => 'primaryPurple',
             ],
             [
                 'product_type_id' => ProductTypeEnum::Background,
-                'name' => 'Neon Background',
+                'name' => 'Green Background',
                 'price' => 1200,
                 'context' => 'primaryGreen',
+            ],
+            [
+                'product_type_id' => ProductTypeEnum::Background,
+                'name' => 'Orange Background',
+                'price' => 1200,
+                'context' => 'primaryOrange',
+            ],
+            [
+                'product_type_id' => ProductTypeEnum::Background,
+                'name' => 'Yellow Background',
+                'price' => 1200,
+                'context' => 'primaryYellow',
+            ],
+            [
+                'product_type_id' => ProductTypeEnum::Background,
+                'name' => 'Pink Background',
+                'price' => 1200,
+                'context' => 'primaryPink',
+            ],
+            [
+                'product_type_id' => ProductTypeEnum::Background,
+                'name' => 'First Default Background',
+                'price' => 1200,
+                'context' => 'primaryDefault',
+            ],
+            [
+                'product_type_id' => ProductTypeEnum::Background,
+                'name' => 'Second Default Background',
+                'price' => 1200,
+                'context' => 'primaryDefault',
+            ],
+            [
+                'product_type_id' => ProductTypeEnum::Background,
+                'name' => 'Third Default Background',
+                'price' => 1200,
+                'context' => 'primaryDefault',
+            ],
+            [
+                'product_type_id' => ProductTypeEnum::Background,
+                'name' => 'Fourth Default Background',
+                'price' => 1200,
+                'context' => 'primaryDefault',
             ],
         ];
 
