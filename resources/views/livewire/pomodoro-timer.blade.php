@@ -1,16 +1,33 @@
 @php use App\Enums\PomodoroStatusEnum; @endphp
 <div class="bg-opacity-20 bg-white rounded-lg shadow-lg p-6 w-1/4 text-center">
-    <div class="flex justify-center items-center gap-4 mb-6">
-        <button wire:click="setType('regular')" id="setFocus" value="regular"
-                class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white focus:outline-none shadow-sm">FOCUS
-        </button>
-        <button wire:click="setType('break')" id="setBreak" value="break"
-                class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white shadow-sm">BREAK
-        </button>
-        <button wire:click="setType('custom')" id="setLongBreak" value="custom"
-                class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white shadow-sm">LONG BREAK
-        </button>
-    </div>
+    @auth
+        <div class="flex justify-center items-center gap-4 mb-6">
+            <button wire:click="setType('regular')" id="setFocus" value="regular"
+                    class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white focus:outline-none shadow-sm">
+                FOCUS
+            </button>
+            <button wire:click="setType('break')" id="setBreak" value="break"
+                    class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white shadow-sm">BREAK
+            </button>
+            <button wire:click="setType('custom')" id="setLongBreak" value="custom"
+                    class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white shadow-sm">LONG BREAK
+            </button>
+        </div>
+    @endauth
+    @guest
+        <div class="flex justify-center items-center gap-4 mb-6">
+            <button id="setFocus" value="regular"
+                    class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white focus:outline-none shadow-sm">
+                FOCUS
+            </button>
+            <button id="setBreak" value="break"
+                    class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white shadow-sm">BREAK
+            </button>
+            <button id="setLongBreak" value="custom"
+                    class="px-4 h-8 rounded-md font-bold hover:bg-white focus:bg-white shadow-sm">LONG BREAK
+            </button>
+        </div>
+    @endguest
 
     <div wire:poll.1000ms="decrementTime">
         <div id="timerDisplay" class="text-7xl font-extrabold mb-6 text-white">
@@ -49,7 +66,8 @@
         @endauth
         @guest
             <div class="text-white flex justify-center items-center">
-            And there. Before you can use Pomodoro, register or log in to your account. This measure is used to ensure that points are correctly deposited into your account.
+                And there. Before you can use Pomodoro, register or log in to your account. This measure is used to
+                ensure that points are correctly deposited into your account.
             </div>
         @endguest
     </div>
@@ -122,6 +140,7 @@
     });
 
     document.addEventListener('DOMContentLoaded', function () {
+        notifyPomodoroComplete();
         updateTitle();
 
         const focusButton = document.getElementById('setFocus');
